@@ -1,0 +1,27 @@
+services:
+  backend:
+    build:
+      context: .
+      dockerfile: backend/Dockerfile
+    environment:
+      APP_NAME: ${APP_NAME:-InterVue}
+      WHISPER_MODEL: ${WHISPER_MODEL:-small.en}
+      WHISPER_DEVICE: ${WHISPER_DEVICE:-cpu}
+      WHISPER_COMPUTE_TYPE: ${WHISPER_COMPUTE_TYPE:-int8}
+      CHATTERBOX_URL: ${CHATTERBOX_URL:-}
+      CHATTERBOX_COMMAND: ${CHATTERBOX_COMMAND:-}
+      VMAF_TARGET: ${VMAF_TARGET:-80}
+      VIDEO_RETENTION_DAYS: ${VIDEO_RETENTION_DAYS:-4}
+      HF_HOME: /app/data/model-cache
+    volumes:
+      - ./data:/app/data
+    extra_hosts:
+      - host.docker.internal:host-gateway
+    restart: unless-stopped
+  frontend:
+    build: ./frontend
+    ports:
+      - '127.0.0.1:3000:3000'
+    depends_on:
+      - backend
+    restart: unless-stopped

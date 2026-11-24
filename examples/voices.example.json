@@ -1,0 +1,4 @@
+[
+  {"id":"example-voice-a","label":"Example professional voice A","reference":"/private/voices/voice-a.wav","approved":false,"license_note":"Replace with a consented or properly licensed voice reference"},
+  {"id":"example-voice-b","label":"Example professional voice B","reference":"/private/voices/voice-b.wav","approved":false,"license_note":"Replace with a consented or properly licensed voice reference"}
+]
